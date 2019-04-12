@@ -13,7 +13,7 @@ def get_dir_address
 
   # if entered more than one word separated by space
   elsif a.length > 1
-    abort('Not space in argument.')
+    abort('No space in argument.')
 
   # if normal input, get the arg as address
   else
@@ -24,31 +24,34 @@ def get_dir_address
 
 end
 
-#-----THESE ARE THE SET UPS
-#-----IT WRITES THE COMMUN GEM SETTING INTO THE FILE
-#-----IT CREATES A EMPTY .ENV
+#-----THESE ARE THE SET UP DOCS
+#-----IT CREATES A GEMFILE AND WRITES THE COMMON GEM SETTING INTO THE FILE
+#-----IT CREATES AN EMPTY .ENV
 #-----IT CREATES A .GITIGNORE AND WRITES IN .ENV
-def gemfile_set
-  default_gems = ['source "https://rubygems.org"',"ruby '2.5.1'", "gem 'rubocop', '~> 0.57.2'", "gem 'rspec'","gem 'dotenv'", "gem 'pry'","gem 'launchy'", "gem 'nokogiri'"]
+#-----IT CREATES AN EMPTY README
+def create_set_up_docs
+  # Gemfile
   gemfile = File.open("Gemfile","w")
-
-  # putting every line into the Gemfile
-  default_gems.each do |line|
-    gemfile.puts(line)
-  end
-
+  gemfile.puts("""source 'https://rubygems.org'\nruby '2.5.1'\ngem 'rubocop', '~> 0.57.2'\ngem 'rspec'\ngem 'dotenv'\ngem 'pry'\ngem 'launchy'\ngem 'nokogiri'""")
   gemfile.close
-end
+  puts "> Gemfile created"
 
-def dotenv_set
+  # .env
+
   dotenv_file = File.open(".env","w")
   dotenv_file.close
-end
+  puts '> .env created'
 
-def gitignore_set
+  # .gitignore
   gitignore_file = File.open(".gitignore","w")
   gitignore_file.puts(".env")
   gitignore_file.close
+  puts "> .gitignore with .env created"
+
+  # README.de
+  read_me = File.open("README.md","w")
+  read_me.close
+  puts '> README.de created'
 end
 
 
@@ -65,29 +68,14 @@ end
 def init_rb
 
   first_project = File.new("00_first.rb","w")
-  first_projetc =
-  first_project.puts('# require ""')
-  3.times do first_project.puts('')
-  end
-  first_project.puts('# def methode(arg)')
-  3.times do first_project.puts('')
-  end
-  first_project.puts('# end')
+
+  # put some regular lines that I never write myselfAaA
+  first_project.puts("""# require ''\n\n\n# def method(arg)\n\n# end""")
 end
 
 def init_spect
   first_project = File.open("00_first_spec.rb","w")
-  first_project.puts('# require_relative "../lib/00_first"')
-  3.times do first_project.puts('')
-  end
-  first_project.puts('# describe "" do')
-  first_project.puts('')
-  first_project.puts('# it "" do')
-  3.times do first_project.puts('')
-  end
-  first_project.puts('# end')
-  first_project.puts('')
-  first_project.puts('# end')
+  first_project.puts("""# require_relative '../lib/00_first'\n\n\n# describe '' do\n\n# it '' do\nexpect().to eq()\n# end\n\n#end")
 end
 
 
@@ -118,10 +106,8 @@ def mkdir_and_go_to
 
   puts "> Creating dir #{address}/lib..."
   Dir.mkdir("lib")
-  puts "> Setting up Gemfile, .env and .gitignore"
-  gemfile_set
-  dotenv_set
-  gitignore_set
+  puts "> Creating basic setting files..."
+  create_set_up_docs
 
   # bundle gems and init rspec
   puts "> Bundling gems and initiating rspec..."
