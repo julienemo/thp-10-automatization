@@ -28,7 +28,7 @@ end
 #-----IT CREATES A GEMFILE AND WRITES THE COMMON GEM SETTING INTO THE FILE
 #-----IT CREATES AN EMPTY .ENV
 #-----IT CREATES A .GITIGNORE AND WRITES IN .ENV
-#-----IT CREATES AN EMPTY README
+#-----IT CREATES A README WITH SIGNITURE
 def create_set_up_docs
   # Gemfile
   gemfile = File.open("Gemfile","w")
@@ -50,6 +50,7 @@ def create_set_up_docs
 
   # README.de
   read_me = File.open("README.md","w")
+  read_me.puts("A ruby-generated folder\n\n\n\-Julie Kwok @julienemo")
   read_me.close
   puts '> README.de created'
 end
