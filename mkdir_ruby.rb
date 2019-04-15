@@ -72,11 +72,14 @@ def init_rb
 
   # put some regular lines that I never write myselfAaA
   first_project.puts("""# require ''\n\n\n# def method(arg)\n\n# end""")
+
+  first_project.close
 end
 
 def init_spect
   first_project = File.open("00_first_spec.rb","w")
   first_project.puts("""# require_relative '../lib/00_first'\n\n\n# describe '' do\n\n# it '' do\nexpect().to eq()\n# end\n\n#end")
+  first_project.close
 end
 
 
