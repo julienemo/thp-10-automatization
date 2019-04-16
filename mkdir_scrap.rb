@@ -37,6 +37,7 @@ def create_set_up_docs
   puts "> Gemfile created"
 
   # .env
+
   dotenv_file = File.open(".env","w")
   dotenv_file.close
   puts '> .env created'
@@ -47,43 +48,29 @@ def create_set_up_docs
   gitignore_file.close
   puts "> .gitignore with .env created"
 
-  # README.md
+  # README.de
   read_me = File.open("README.md","w")
   read_me.puts("A ruby-generated folder\n\n\n\-Julie Kwok @julienemo")
   read_me.close
   puts '> README.de created'
-
-  # app.rb
-  app_rb = File.open("app.rb.md","w")
-  app_rb.puts("require 'bundler'\nBundler.require")
-  app_rb.close
-  puts '> app.rb created'
 end
 
 
 #-----BUNDLE INSTALL AND RSPEC INIT
 def bundle_and_rspec
   system('bundle install')
-  system('rspec --init')
 end
 
 
 #-----THESE ARE TO CREATE THE PROJECTS AND ITS TEST
 #-----THE FIRST LINES SUCH AS REQUIRE GEM/ REQUIRE_RELATIVE
 #-----AND METHOD STRUCTURES ARE GIVEN
-def init_rb
+def init_scrap
 
-  first_project = File.new("00_first.rb","w")
+  first_project = File.new("scrap.rb","w")
 
-  # put some regular lines that I never write myselfAaA
+  # put some regular lines that I never write myself
   first_project.puts("""# require ''\n\n\n# def method(arg)\n\n# end""")
-
-  first_project.close
-end
-
-def init_spect
-  first_project = File.open("00_first_spec.rb","w")
-  first_project.puts("""# require_relative '../lib/00_first'\n\n\n# describe '' do\n\n# it '' do\nexpect().to eq()\n# end\n\n#end")
   first_project.close
 end
 
@@ -113,24 +100,17 @@ def mkdir_and_go_to
   Dir.chdir(address)
   puts "> wd switched to #{Dir.pwd}"
 
-  puts "> Creating dir #{address}/lib..."
-  Dir.mkdir("lib")
   puts "> Creating basic setting files..."
   create_set_up_docs
 
   # bundle gems and init rspec
-  puts "> Bundling gems and initiating rspec..."
+  puts "> Bundling gems"
   bundle_and_rspec
 
-  Dir.chdir("lib")
-  puts "> Switching to #{Dir.pwd} to initate 00_first.rb..."
-  init_rb
-  Dir.chdir("../spec")
-  puts "> Switching to #{Dir.pwd} to initate 00_first_spec.rb..."
-  init_spect
+  puts "> Initate scrap.rb..."
+  init_scrap
   puts "> First project-test skeleton created"
-  Dir.chdir("../")
-  puts "> Switched to #{Dir.pwd}. Intiating git and first commit "
+  puts "> Intiating git and first commit "
   git_set
   puts "*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*"
   puts "*--*--*--                                                *--*--*--*"
@@ -142,7 +122,7 @@ def mkdir_and_go_to
   Dir.entries(".").sort.each do |entry|
     puts "-- #{entry}"
   end
-  puts "> Next step : cd #{address}/lib to write first project ! "
+  puts "> Next step : cd #{address} to write first project ! "
 end
 
 mkdir_and_go_to
