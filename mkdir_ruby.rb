@@ -55,7 +55,7 @@ def create_set_up_docs
 
   # app.rb
   app_rb = File.open("app.rb.md","w")
-  app_rb.puts("require 'bundler'\nBundler.require")
+  app_rb.puts("require 'bundler'\nBundler.requirer\n$:.unshift File.expand_path('./../lib', __FILE__)")
   app_rb.close
   puts '> app.rb created'
 end
